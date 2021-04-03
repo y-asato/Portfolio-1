@@ -56,7 +56,7 @@ section {
 
 @media (max-width: 768px) {
   .hero {
-    padding: 180px 3% 200px 2%;
+    padding: 180px 3% 200px;
   }
 }
 

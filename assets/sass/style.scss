@@ -1,0 +1,363 @@
+$bg-gray: #f7f7f7;
+$bg-footer: #444;
+
+%section-padding {
+    padding: 100px 20%;
+
+    @media (max-width: 1280px) {
+        padding: 80px 10%;
+    }
+
+    @media (max-width: 768px) {
+        padding: 80px 5%;
+    }
+}
+
+html,
+body {
+    font-family: 'Noto Sans JP', sans-serif;
+}
+
+.fd-in {
+    opacity: 0;
+    transform: translate(0, 60px);
+    -webkit-transform: translate(0, 60px);
+}
+.fd-done {
+    opacity: 1.0;
+    transform: translate(0, 0);
+    -webkit-transform: translate(0, 0);
+}
+
+section {
+    overflow: hidden;
+    transition: 0.8s;
+}
+
+.section {
+    &__title {
+        font-size: 48px;
+        text-align: center;
+
+        &--description {
+            font-size: 18px;
+            text-align: center;
+            margin-bottom: 50px;
+        }
+    }
+}
+
+
+.hero {
+    padding: 180px 10% 200px;
+    background-image: linear-gradient(-45deg, #c2e9fb 0%, #a1c4fd 100%);
+    color: #fff;
+
+    h1 {
+        font-size: 80px;
+        line-height: 1;
+        font-weight: 900;
+        margin-bottom: 20px;
+    }
+
+    p {
+        font-size: 20px;
+        line-height: 1;
+        font-weight: 500;
+
+        @media (max-width: 768px) {
+            line-height: 1.5;
+        }
+    }
+
+    a {
+        display: inline-block;
+        background: #fff;
+        padding: 15px 40px 15px 20px;
+        margin: 40px 0 0;
+        font-size: 18px;
+        font-weight: 900;
+        color: #90caf9;
+        text-decoration: none;
+        transition: .5s;
+        border: 2px solid #fff;
+        position: relative; //子要素で相対的な配置ができるように定義する
+
+        @media (max-width: 768px) {
+            display: block;
+        }
+
+        &::after {
+            position: absolute; //absoluteを使用し、相対的な配置ができるようにする
+            content: ""; //【重要】これを入れ忘れると表示されない
+            right: 20px; //親要素の右端から20px
+            top: calc(50% - 4px); //親要素の上端から50% - 4px
+            width: 8px; //横幅は8px
+            height: 8px; //縦幅は8px
+            border-top: 2px solid #90caf9; //太さ2px 水色の実線を上に描画
+            border-right: 2px solid #90caf9; //太さ2px 水色の実線を右に描画
+            -webkit-transform: rotate(45deg); //45°回転
+            transform: rotate(45deg); //45°回転
+        }
+
+        &:hover {
+            background: #90caf9;
+            color: #fff;
+
+            &::after {
+                background-color: #fff;
+            }
+        }
+    }
+}
+
+.about {
+    @extend %section-padding;
+
+    &__container {
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    &__image {
+        width: 50%;
+
+        @media (max-width: 768px) {
+            width: 100%;
+        }
+
+        img {
+            width: 100%;
+            height: auto;
+        }
+    }
+
+    &__text {
+        width: 50%;
+
+        @media (max-width: 768px) {
+            width: 100%;
+        }
+
+        p {
+            line-height: 2;
+            margin-left: 50px;
+            font-size: 18px;
+            font-weight: 500;
+
+            @media (max-width: 768px) {
+                margin: 20px 0 0;
+            }
+        }
+    }
+}
+
+.point {
+    @extend %section-padding;
+    background: $bg-gray;
+
+    &__list {
+        display: flex;
+        flex-wrap: wrap;
+        list-style-type: none;
+    }
+
+    &__item {
+        text-align: center;
+        width: calc((100% / 3) - 14px); //calcで計算式を用いることができる。3分割した後にそれぞれ-14pxする。
+
+        &:not(:first-child) { //最初の要素ではない場合のものにスタイルを指定
+            margin-left: 21px;
+        }
+
+        @media (max-width: 768px) {
+            width: 100%;
+
+            &:not(:first-child) { //最初の要素ではない場合のものにスタイルを指定
+                margin: 30px 0 0;
+            }
+        }
+
+        i {
+            font-size: 44px;
+            font-weight: 900;
+            width: 50%;
+            border-bottom: 4px solid #000;
+            display: inline-block;
+            text-align: center;
+            padding: 0 0 8px;
+            margin: 0 0 20px;
+        }
+
+        p {
+            text-align: left;
+            font-size: 18px;
+        }
+    }
+}
+
+.gallery {
+    @extend %section-padding;
+
+    &__list {
+        list-style-type: none;
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    &__item {
+        width: calc(50% - 10px);
+
+        &:not(:nth-child(-n+2)) { //フォトギャラリーのところのように複数liが並んでいる際に、最初の2つ以外のものにスタイルを指定したいときに使用。 
+            margin-top: 20px;
+        }
+
+        &:nth-child(2n) {  //今回であればフォトギャラリーのような複数liが並んでいる際に、偶数番目のものにスタイルを指定したいときに使用。
+            margin-left: 20px;
+        }
+
+        img {
+            width: 100%;
+            height: auto;
+        }
+
+        a {
+            transition: .5s;
+
+            &:hover { //マウスを乗せた時に
+                opacity: .7; //不透明度を70%にする
+
+                img {
+                    box-shadow: 0 0 15px rgba(0,0,0, .15);
+                }
+            }
+        }
+    }
+}
+
+.price {
+    @extend %section-padding;
+    background: $bg-gray;
+
+    &__list {
+        display: flex;
+        flex-wrap: wrap;
+        list-style-type: none;
+    }
+
+    &__item {
+        background: #fff;
+        text-align: center;
+        border-style: 0 10px rgba(0, 0, 0, .15);
+        padding: 50px 30px;
+        width: calc(50% - 15px);
+
+        &:nth-child(2n) {
+            margin-left: 30px;
+        }
+
+        @media (max-width: 768px) {
+            width: 100%;
+
+            &:not(:first-child) {
+                margin: 30px 0;
+            }
+        }
+
+        h3 {
+            font-size: 24px;
+            line-height: 1;
+            margin-bottom: 15px;
+        }
+
+        .yen {
+            font-size: 64px;
+            font-weight: 100;
+            line-height: 1;
+
+            span {
+                font-size: 30px;
+            }
+        }
+
+        .cando {
+            margin: 40px 0 0;
+
+            ol {
+                list-style-type: none;
+            }
+
+            li {
+                background: #f7f7f7;
+                padding: 10px;
+                font-size: 18px;
+                border-radius: 6px;
+
+                &:not(:first-child) {
+                    margin: 15px 0 0;
+                }
+            }
+        }
+    }
+}
+
+.cta {
+    @extend %section-padding;
+    
+    &__btn {
+        text-align: center;
+
+        a {
+            display: inline-block;
+            background: #90caf9;
+            padding: 15px 40px 15px 20px;
+            margin: 0 0 0;
+            font-size: 18px;
+            font-weight: 900;
+            color: #fff;
+            text-decoration: none;
+            transition: .5s;
+            border: 2px solid #fff;
+            position: relative;
+
+            @media (max-width: 768px) {
+                display: block;
+            }
+
+            &::after {
+                position: absolute;
+                content: "";
+                right: 20px;
+                width: 8px;
+                height: 8px;
+                top: calc(50% - 4px);
+                border-top: 2px solid #fff;
+                border-right: 2px solid #fff;
+                -webkit-transform: rotate(45deg);
+                transform: rotate(45deg);
+            }
+
+            &:hover {
+                border-color: #90caf9;
+                background: #fff;
+                color: #90caf9;
+
+                &::after {
+                    border-color: #90caf9;
+                }
+            }
+        }
+    }
+}
+
+footer {
+    padding: 15px 0;
+    background: $bg-footer;
+    text-align: center;
+    color: #fff;
+
+    small {
+        font-size: 14px;
+        line-height: 1;
+    }
+}

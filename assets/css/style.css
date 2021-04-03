@@ -54,11 +54,23 @@ section {
   color: #fff;
 }
 
+@media (max-width: 768px) {
+  .hero {
+    padding: 180px 5% 200px 0;
+  }
+}
+
 .hero h1 {
   font-size: 80px;
   line-height: 1;
   font-weight: 900;
   margin-bottom: 20px;
+}
+
+@media (max-width: 768px) {
+  .hero h1 {
+    font-size: 65px;
+  }
 }
 
 .hero p {
@@ -316,6 +328,16 @@ section {
 
 .price__item .cando li:not(:first-child) {
   margin: 15px 0 0;
+}
+
+.cta h2 {
+  margin-bottom: 30px;
+}
+
+@media (max-width: 768px) {
+  .cta h2 {
+    font-size: 40px;
+  }
 }
 
 .cta__btn {
